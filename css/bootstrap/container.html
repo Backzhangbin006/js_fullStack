@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+    .demo-container {
+        height: 100vh;
+        background-color: green;
+    }
+    .row-demo {
+        border: 1px solid #000;
+        height: 200px;
+    }
+    .col-demo {
+        border: 1px solid #000;
+        height: 50px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container-fluid demo-container">
+        <!-- justify-content-center居中设置  -->
+        <!-- justify-content-end向右靠齐设置  -->
+      <div class="row row-demo">   
+           <div class="col-4 col-demo order-2">        <!-- border默认为每行分为12列，现在设置每一个col占4列    offset-2,col向右偏移两列   -->
+              1
+          </div>
+          <div class="col-4 col-demo order-1">
+              2
+          </div>
+      </div>
+      <div class="row row-demo">   
+            <div class="col-md-4 col-sm-12 col-demo ">        <!-- border默认为每行分为12列，现在设置每一个col占4列    offset-2,col向右偏移两列   -->
+               1
+           </div>
+           <div class="col-md-8 col-demo ">
+               2
+           </div>
+       </div>
+    </div>
+</body>
+</html>

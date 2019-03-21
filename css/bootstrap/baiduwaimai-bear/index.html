@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>外卖熊</title>
+  <link rel="stylesheet" href="./bear.css">
+</head>
+<body>
+    <!-- <button>按钮</button> -->
+  <div class="view proload">
+    <div class="load-logo-c">
+      <div class="ride1-c">
+        <div class="ride"></div>
+      </div>
+      <div class="process-c">
+        <div class="process-v"></div>
+      </div>
+      <div class="process-txt"></div>
+    </div>
+    <div id="next">
+        下一屏
+    </div>
+  </div>
+  <div class="view index">
+    第二屏
+  </div>
+  <!-- 设置进度条自动伸展 -->
+  <script>
+     const process = document.querySelector('.process-v');
+     const next = document.getElementById('next');
+     let width = 10   //初始进度条长度为10
+     let interval =setInterval(()=>{
+         //width =width+10
+         width +=10;
+         next.addEventListener('click',()=>{
+             const viewProload = document.querySelector('.view.proload')
+             viewProload.style.transform = 'translate3d(0,'+ -100 +'%,0)';
+         })
+         console.log(width);
+         process.style.width = width+'%';
+         if (width>=100)clearInterval(interval)  //设置当进度条长度大于100时，停止调用setInterval
+     },100);   //100表示每隔100毫秒增加
+     //setTimeout(()=>{},100);
+  </script>
+</body>
+</html>
