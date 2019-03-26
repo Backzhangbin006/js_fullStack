@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;padding: 0;
+    }
+    html{
+        background: url(http://unsplash.it/1500/1000?image=881&blur=50);
+        background-size: cover;
+        font-family: 'helvetice neue';
+        text-align: center;
+        font-size: 10px;
+    }
+    body{
+        margin: 0;
+        font-size: 2rem;
+        display: flex;
+        flex: 1;
+        align-items: center;  /*弹性布局时，盒子居中，先设置弹性布局这个属性才能生效*/
+        min-height: 100vh;
+    }
+    .clock{
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid #fff;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1),  /*表示阴影分别向xyz轴移动5，5,0像素，黑色阴影*/
+        inset 0 0 3px #efefef,
+        inset 0 0 10px #000,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+    .clock-face{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px);
+    }
+    .hand{
+        width: 50%;
+        height: 6px;
+        background-color: #000;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;      /*定位旋转基点*/
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+    }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hand-hour"></div>
+            <div class="hand hand-min"></div>
+            <div class="hand hand-second"></div>
+        </div>
+    </div>
+    <script>
+        // 获取三个指针
+    const secondHand=document.querySelector('.hand-second');
+    const minHand=document.querySelector('.hand-min');
+    const hourHand=document.querySelector('.hand-hour');
+
+    function setDate(){
+        //原生js构造函数Date，获取本地时间
+        const now=new Date();
+        // console.log(now);
+        const seconds=now.getSeconds();
+        // console.log(second);
+        const mins=now.getMinutes();
+        const hour=now.getHours();
+        //设置秒针的位置
+        const secondsDegress=((seconds/60)*360)+90;  //css属性设置了秒针为旋转90度，执行js后css属性失效，所以+90的旋转角度
+        secondHand.style.transform=`rotate(${secondsDegress}deg)`;   //修改css中second属性的transform属性
+        const minsDegress=((mins/60)*360)+((seconds/60)*6)+90;
+        minHand.style.transform=`rotate(${minsDegress}deg)`;
+        const hoursDegress=((hour/12)*360)+((mins/60)*30)+90;
+        hourHand.style.transform=`rotate(${hoursDegress}deg)`;
+    }
+    setInterval(setDate,1000);
+    setDate()
+    </script>
+</body>
+</html>
