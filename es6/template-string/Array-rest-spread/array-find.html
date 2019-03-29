@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>array find</title>
+</head>
+<body>
+    <script>
+    const ages=[
+        {
+            name:'李雷',age:30
+        },
+        {
+            name:'李雷1',age:30
+        },
+        {
+            name:'韩梅梅',age:30
+        },
+        {
+            name:'韩梅梅1',age:10
+        }
+    ];
+    const this_age=ages.find((age)=>age.age>18);                 /*找到第一个满足的条件*/
+    const this_age_filter= ages.filter((age)=>age.age>18);       /*找出所有满足条件的元素*/
+    const this_age_index=ages.findIndex((age)=>age.age>18);      /*找到满足条件的个数*/
+    const this_age_every=ages.every((age)=>age.age>18);          /*every要求每一项都满足规则，否则输出false*/
+    const this_age_some=ages.some(age=>age.age>18);              /*some只要其中一项满足规则则输出true*/
+    // console.log(this_age,this_age_index,this_age_filter)
+    console.log(this_age_every,this_age_some);
+    </script>
+</body>
+</html>
