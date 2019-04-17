@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>贪吃蛇</title>
+  <style>
+  #gameCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  #score {
+    text-align: center;
+    font-size: 60px;
+    font-family: serif;
+  }
+  </style>
+</head>
+<body>
+  <div id="score">
+    0
+  </div>
+  <canvas id="gameCanvas" width="300" height="300"></canvas>
+
+
+  <script>
+    //  x +-10
+    let dx = 10, dy = 10;
+    const GAME_SPEED = 200;
+    const score = document.getElementById('score');
+    let n = 0;
+    let food =
+    {x:Math.floor(Math.random() * 30) *10,
+     y:Math.floor(Math.random() * 30) *10}
+    function main(){
+      setTimeout(function(){
+        clearCanvas();
+        advanceSnake();
+        drawSnake();
+        eat();
+        drawfood();
+        if(snake[0].x <0 || snake[0].x >=300 || snake[0].y <0 || snake[0].y >=300){
+          score.innerHTML = 'GAME OVER';
+          return ;
+        }
+        for(let i =1;i <snake.length;i++){
+          if(snake[0].x === snake[i].x && snake[0].y === snake[i].y){
+            score.innerHTML = 'GAME OVER';
+            return ;
+          }
+        }
+        main();
+      },GAME_SPEED)
+    }
+    main();
+    // snake 长胖  push  
+    //  边界 
+    let snake = [
+      {x:150,y:150},
+      {x:140,y:150},
+      {x:130,y:150},
+      {x:120,y:150},
+      {x:110,y:150},
+    ];
+
+  const gameCanvas = document.getElementById('gameCanvas');
+  // 绘制上下文环境  API 在ctx上
+  const ctx = gameCanvas.getContext('2d');
+  
+  
+  // 蛇?🐍  身子是几个rect组成， 位置  坐标
+  // snake.forEach(e=>{
+  //           ctx.fillRect(e.x, e.y, 10,10);
+  //           ctx.fillStyle = 'green';
+  //       })
+
+    // 初始化
+  clearCanvas();
+
+  // 初始绘制蛇
+  drawSnake();
+  dx = 10;
+  dy = 0;
+
+  // 定时实现移动
+  // setInterval(() =>{
+  //   clearCanvas();
+  //   advanceSnake();
+  //   drawSnake();
+  // },300)
+  // clearCanvas();
+  // advanceSnake();
+  // drawSnake();
+
+    // 初始化函数
+  function clearCanvas (){
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.fillRect(0,0,gameCanvas.width,gameCanvas.height);
+    ctx.strokeRect(0,0,gameCanvas.width,gameCanvas.height);
+  }
+
+  // 绘制蛇
+  function drawSnake(){
+    snake.forEach(drawSnakePart);
+  }
+
+  // 绘制方法
+  function drawSnakePart(part){
+    ctx.fillStyle = 'lightgreen';
+    ctx.strokeStyle = 'darkgreen';
+    ctx.fillRect(part.x,part.y,10,10);
+    ctx.strokeRect(part.x,part.y,10,10);
+  }
+
+  // 移动方式
+  function advanceSnake() {
+    // canvas  上一次的基础上更绘下一次
+    // 全动吗？ 最前面加一个，第一个前进一个，最后一个移队
+    const head = { x:snake[0].x + dx,y:snake[0].y + dy};
+    snake.unshift(head);
+    snake.pop();
+  
+  }
+
+  // 移动方向
+  function changeDirection(event){
+    const LEFT_KEY = 37;
+    const RIGHT_KEY = 39;
+    const UP_KEY = 38;
+    const DOWN_KEY = 40;
+    const keyPressed = event.keyCode;
+    const goinRight = dx === 10;
+    const goingLeft = dx === -10;
+    const goingUp = dy === -10;
+    const goingDown = dy === 10;
+
+    if(keyPressed === LEFT_KEY && !goinRight){
+      dx = -10;
+      dy = 0;
+    }else if(keyPressed === RIGHT_KEY && ! goingLeft){
+      dx = 10;
+      dy = 0;
+    }else if(keyPressed === UP_KEY && !goingDown){
+      dx = 0;
+      dy = -10;
+    }else if(keyPressed === DOWN_KEY && !goingUp){
+      dx = 0;
+      dy = 10;
+    }
+    
+  }
+  document.addEventListener('keydown',changeDirection);
+
+  // 食物
+  function foodpart(){
+  //   let food = [
+  //   {x:Math.floor(Math.random() * 30 + 1) *10,
+  //    y:Math.floor(Math.random() * 30 + 1) *10}
+  // ];
+    food.x=Math.floor(Math.random() * 30) *10;
+    food.y=Math.floor(Math.random() * 30) *10;
+  }
+  
+
+  // 绘制食物
+  function drawfood() {
+    // foodpart();
+    // food.forEach(drawfoodpart);
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.x,food.y,10,10);
+  }
+  // 绘制食物方法
+  // function drawfoodpart (part){
+  //   ctx.fillStyle = 'red';
+  //   ctx.fillRect(part.x,part.y,10,10)
+  // }
+  // 清除食物方法
+
+  // 蛇变长
+  function addsnake () {
+    const head = { x:snake[0].x + dx,y:snake[0].y + dy};
+    snake.unshift(head);
+  }
+  // 吃方法
+  function eat() {
+    if(snake[0].x === food.x && snake[0].y === food.y){
+      addsnake();
+      foodpart();
+      drawfood();
+      n +=1;
+      score.innerHTML=n;
+    }
+  }
+
+  
+
+
+  </script>
+</body>
+</html>
