@@ -1,0 +1,62 @@
+＃日志
+日志
+* .log
+npm-debug.log *
+yarn-debug.log *
+yarn-error.log *
+
+＃运行时数据
+的PID
+* .pid
+* .seed
+* .pid.lock
+
+＃由jscoverage / JSCover产生仪表库目录
+LIB-COV
+
+＃像istanbul这样的工具使用的覆盖目录
+覆盖
+
+.DS_Store
+＃ NYC测试覆盖
+.nyc_output
+
+＃咕噜中间存储（http://gruntjs.com/creating-plugins#storing-task-files）
+.grunt
+
+＃鲍尔依赖目录（https://bower.io/）
+bower_components
+
+# node-waf配置
+.lock-WScript的
+
+＃编译二进制插件（https://nodejs.org/api/addons.html）
+构建 / 发布
+
+＃依赖目录
+node_modules /
+jspm_packages /
+
+＃打字稿V1申报文件
+打字 /
+
+＃可选npm缓存目录
+.npm
+
+＃可选的eslint缓存
+.eslintcache
+
+＃可选的REPL历史记录
+.node_repl_history
+
+# 'npm pack'的输出
+* .tgz
+
+＃纱诚信档案
+.yarn完整性
+
+＃ dotenv环境变量文件
+.ENV
+
+＃ next.js构建输出
+。下一个
